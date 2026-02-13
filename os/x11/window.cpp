@@ -1,5 +1,5 @@
 // LAF OS Library
-// Copyright (C) 2018-2025  Igara Studio S.A.
+// Copyright (C) 2018-2026  Igara Studio S.A.
 // Copyright (C) 2017-2018  David Capello
 //
 // This file is released under the terms of the MIT license.
@@ -1230,8 +1230,6 @@ void WindowX11::processX11Event(XEvent& event)
         ev.setButton(button);
 
         if (event.type == ButtonPress) {
-          gfx::Point currentPos(event.xbutton.x / m_scale, event.xbutton.y / m_scale);
-
           if (isDoubleClickEvent(ev)) {
             ev.setType(Event::MouseDoubleClick);
             m_doubleClickButton = Event::NoneButton;
@@ -1239,7 +1237,7 @@ void WindowX11::processX11Event(XEvent& event)
           else {
             m_doubleClickButton = button;
             m_doubleClickTick = base::current_tick();
-            m_doubleClickStartPos = currentPos;
+            m_doubleClickStartPos = ev.position();
           }
         }
       }
